@@ -13,6 +13,12 @@ jobs:
         with:
           go-version: 1.18
       - name: run unit test
-        run: go test -v ./...
+        run:
+          go get learn_orm/middlewares
+          go get learn_orm/controllers/bookController
+          go get learn_orm/middlewares
+          go get learn_orm/config
+          go get learn_orm/database
+          go test -v ./...
       - name: run linting
         uses: golangci/golangci-lint-action@v3
