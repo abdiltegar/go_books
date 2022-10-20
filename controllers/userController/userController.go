@@ -1,6 +1,7 @@
 package userController
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"learn_orm/dto"
 	"learn_orm/services/user"
@@ -51,7 +52,10 @@ func (ctrl *userController) GetUserController(c echo.Context) error {
 // create user
 func (ctrl *userController) CreateUserController(c echo.Context) error {
 	user := dto.DTOUserReq{}
-	c.Bind(&user)
+
+	if err := c.Bind(&user); err != nil {
+		fmt.Println(err.Error())
+	}
 
 	err := ctrl.userService.Create(user)
 	if err != nil {
@@ -84,7 +88,10 @@ func (ctrl *userController) UpdateUserController(c echo.Context) error {
 	id, _ := strconv.ParseUint(c.Param("id"), 16, 32)
 
 	user := dto.DTOUserReq{}
-	c.Bind(&user)
+
+	if err := c.Bind(&user); err != nil {
+		fmt.Println(err.Error())
+	}
 
 	err := ctrl.userService.Update(uint(id), user)
 	if err != nil {
@@ -100,7 +107,9 @@ func (ctrl *userController) UpdateUserController(c echo.Context) error {
 func (ctrl *userController) LoginController(c echo.Context) error {
 
 	user := dto.DTOUserReq{}
-	c.Bind(&user)
+	if err := c.Bind(&user); err != nil {
+		fmt.Println(err.Error())
+	}
 
 	res, err := ctrl.userService.Login(user)
 	if err != nil {

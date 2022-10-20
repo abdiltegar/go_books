@@ -32,5 +32,8 @@ func InitDB() {
 
 	DB = db
 
-	DB.AutoMigrate(&models.User{}, &models.Book{})
+	err = DB.AutoMigrate(&models.User{}, &models.Book{})
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 }

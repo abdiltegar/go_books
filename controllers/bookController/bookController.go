@@ -1,6 +1,7 @@
 package bookController
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"learn_orm/dto"
 	"learn_orm/services/book"
@@ -51,7 +52,10 @@ func (ctrl *bookController) GetBookController(c echo.Context) error {
 // create book
 func (ctrl *bookController) CreateBookController(c echo.Context) error {
 	book := dto.DTOBookReq{}
-	c.Bind(&book)
+
+	if err := c.Bind(&book); err != nil {
+		fmt.Println(err.Error())
+	}
 
 	err := ctrl.bookService.Create(book)
 	if err != nil {
@@ -84,7 +88,9 @@ func (ctrl *bookController) UpdateBookController(c echo.Context) error {
 	id, _ := strconv.ParseUint(c.Param("id"), 16, 32)
 
 	book := dto.DTOBookReq{}
-	c.Bind(&book)
+	if err := c.Bind(&book); err != nil {
+		fmt.Println(err.Error())
+	}
 
 	err := ctrl.bookService.Update(uint(id), book)
 	if err != nil {

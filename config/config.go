@@ -29,14 +29,11 @@ func InitConfig() {
 		fmt.Println(err.Error())
 	}
 
-	viper.Unmarshal(cfg)
-	//// baca env
-	//cfg.DB_Username = Env("DB_USERNAME", "root")
-	//cfg.DB_Password = Env("DB_PASSWORD", "secret123")
-	//cfg.DB_Port = Env("DB_PORT", "3306")
-	//cfg.DB_Host = Env("DB_HOST", "localhost")
-	//cfg.DB_Name = Env("DB_NAME", "learn-go")
-	//cfg.API_PORT = Env("API_PORT", ":8080")
+	err := viper.Unmarshal(cfg)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
 	cfg.TOKEN_SECRET = "AbCd3F9H1"
 
 	Cfg = cfg
