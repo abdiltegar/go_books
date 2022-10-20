@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 	"learn_orm/constants"
 	"learn_orm/controllers/bookController"
+	"learn_orm/controllers/haloController"
 	"learn_orm/controllers/userController"
 	mdlwr "learn_orm/middlewares"
 	"learn_orm/repository"
@@ -27,7 +28,9 @@ func New(db *gorm.DB) *echo.Echo {
 	// Controllers
 	bookCtrl := bookController.NewBookController(bookService)
 	usrCtrl := userController.NewUserController(userService)
+	hlCtrl := haloController.NewHaloController()
 
+	e.GET("/halo", hlCtrl.GetHalo)
 	e.POST("/login", usrCtrl.LoginController)
 
 	jwt := middleware.JWT([]byte(constants.SECRET_JWT))
