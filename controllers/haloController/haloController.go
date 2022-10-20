@@ -14,5 +14,5 @@ func NewHaloController() *haloController {
 
 // get halo
 func (ctrl *haloController) GetHalo(c echo.Context) error {
-	return c.HTML(http.StatusOK, "Ini adalah Halo Page")
+	return c.HTML(http.StatusOK, "Ini adalah Halo Page (Updated)")
 }
