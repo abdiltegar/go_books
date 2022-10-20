@@ -1,4 +1,4 @@
-name: ini ci
+name: ini cd
 on:
   push:
     branches:
