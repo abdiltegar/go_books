@@ -1,0 +1,24 @@
+name: ini ci
+on:
+  pull_request:
+    branches:
+      - "master"
+jobs:
+  unit-testing:
+    runs-on: ubuntu-latest
+    name: "ini unit testing"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - name: run unit test
+        run:
+          go get learn_orm/middlewares
+          go get learn_orm/controllers/bookController
+          go get learn_orm/middlewares
+          go get learn_orm/config
+          go get learn_orm/database
+          go test -v ./...
+      - name: run linting
+        uses: golangci/golangci-lint-action@v3
