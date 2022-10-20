@@ -107,10 +107,10 @@ func (srv *userService) Login(payload dto.DTOUserReq) (dto.DTOLoginRes, error) {
 	}
 
 	res := dto.DTOLoginRes{
-		user.ID,
-		user.Name,
-		user.Email,
-		token,
+		ID:    user.ID,
+		Name:  user.Name,
+		Email: user.Email,
+		Token: token,
 	}
 
 	return res, nil
